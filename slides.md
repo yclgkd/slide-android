@@ -122,15 +122,14 @@ h1 {
 
 
 ---
-layout: image
-image: ./share-since-2009.png
-backgroundSize: 85% 78%
 transition: fade-out
 level: 2
 ---
 
 # 全球移动操作系统市场份额
 
+<img src="/img/share-since-2009.png" class="w-[90%] h-auto -mt-5 -ml-5" />
+
 <style>
 h1 {
   background-color: #2B90B6;
@@ -146,11 +145,10 @@ h1 {
 
 ---
 transition: fade-out
-layout: image
-image: ./android-version-history.png
-backgroundSize: 85% 80%
 ---
 # Android 的历史版本
+
+<img src="/img/android-version-history.png" class="w-full h-auto -mt-5 -ml-5" />
 
 <style>
 h1 {
@@ -163,8 +161,6 @@ h1 {
   -moz-text-fill-color: transparent;
 }
 </style>
-
-
 
 --- #6
 layout: image-right
