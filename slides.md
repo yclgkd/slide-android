@@ -1,13 +1,16 @@
 ---
 # You can also start simply with 'default'
 theme: seriph
+favicon: /img/favicon.png
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
 background: ./android.gif
 # some information about your slides (markdown enabled)
 title:  安卓入门
-info: |
-  ## 安卓入门
+info: false
+author: Brian Yao<me@brianyao.tech>
+# keywords field for exported PDF, comma-delimited.
+keywords: 安卓入门
 # apply unocss classes to the current slide
 class: text-center
 # https://sli.dev/custom/highlighters.html
@@ -15,10 +18,13 @@ highlighter: shiki
 # https://sli.dev/guide/drawing
 drawings:
   persist: false
+  enabled: dev
 # slide transition: https://sli.dev/guide/animations#slide-transitions
 transition: slide-left
 # enable MDC Syntax: https://sli.dev/guide/syntax#mdc-syntax
 mdc: true
+presenter: dev
+record: dev
 ---
 
 # ***Android 入门***
@@ -49,14 +55,21 @@ h2 {
 }
 </style>
 
-
+--- #2
+transition: fade-out
+layout: section
 ---
+
+# Android 介绍
+
+
+--- #3
 transition: fade-out
 ---
 
 # 什么是 Android？
 
-Android 是由 Google 开发的开源操作系统，主要用于移动设备如智能手机和平板电脑。它基于 Linux 内核，提供一个灵活的应用程序框架，支持广泛的硬件和软件功能。
+Android 是由 Google 开发的开源操作系统，主要用于智能手机、手表、车机、电视盒子等。它基于 Linux 内核，提供一个灵活的应用程序框架，支持广泛的硬件和软件功能。
 
 <v-clicks>
 
@@ -91,22 +104,34 @@ h1 {
 
 -->
 
----
+--- #4
+layout: two-cols-header
 transition: fade-out
 level: 2
 ---
 
-# Android vs. iOS
+# Android 的历史
 
-| Android | iOS |
-| --- | --- |
-| 开放源代码 | 闭源 |
-| 多任务处理 | 限制多任务 |
-| 定制性强 | 封闭性强 |
-| 多厂商支持 | 单一厂商 |
-| 侧载应用 | 限制侧载 |
-| 更新速度慢 | 更新速度快 |
-| 安全性低 | 安全性高 |
+::left::
+
+<v-clicks>
+
+- 初创与收购：Android 是由安迪·鲁宾（Andy Rubin）等人创立的公司 Android Inc. 开发的，2005 年被 Google 收购。
+- 首次发布：2008 年 9 月 发布首个商业版本的 Android 系统，HTC Dream 是第一款搭载 Android 系统的手机。
+- 命途多舛：由于在开源代码和内核修改上的分歧，安卓一度被 Linux 内核开发社区除名。由于 Android 的开发使用了 Java 语言，2010年甲骨文起诉谷歌指控安卓系统侵犯了 Java 的版权。
+- 新宠诞生：JetBrains 发布了 Kotlin 语言，谷歌宣布 Kotlin 成为 Android 官方开发语言。
+- 快速发展： 安卓数字版（10-15）陆续发布，取消甜点名称，聚焦隐私和性能优化
+
+</v-clicks>
+
+::right::
+
+<v-click>
+<div class="flex flex-col items-center justify-center">
+  <img src="/img/andy.png" class="w-[70%] h-auto" />
+  <p class="text-sm">安迪·鲁宾于2008年在日本举办谷歌开发者日活动</p>
+</div>
+</v-click>
 
 <style>
 h1 {
@@ -120,30 +145,7 @@ h1 {
 }
 </style>
 
-
----
-transition: fade-out
-level: 2
----
-
-# 全球移动操作系统市场份额
-
-<img src="/img/share-since-2009.png" class="w-[90%] h-auto -mt-5 -ml-5" />
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-
----
+--- #5
 transition: fade-out
 ---
 # Android 的历史版本
@@ -163,452 +165,452 @@ h1 {
 </style>
 
 --- #6
-layout: image-right
+transition: fade-out
+level: 2
 ---
 
-# Shiki Magic Move
+# Android vs. iOS
 
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
+<v-clicks>
 
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
+| Android | iOS |
+| --- | --- |
+| 开放源代码 | 闭源 |
+| 多任务处理 | 限制多任务 |
+| 定制性强 | 封闭性强 |
+| 多厂商支持 | 单一厂商 |
+| 侧载应用 | 限制侧载 |
+| 更新速度慢 | 更新速度快 |
+| 安全性低 | 安全性高 |
 
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
+</v-clicks>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+
+--- #7
+transition: fade-out
+level: 2
+---
+
+# 全球移动操作系统市场份额
+
+<a href="https://www.statista.com/statistics/272698/global-market-share-held-by-mobile-operating-systems-since-2009/" target="_blank">
+  <img src="/img/share-since-2009.png" class="w-[85%] h-auto -mt-5 -ml-5" />
+</a>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+
+
+
+--- #8
+transition: fade-out
+layout: section
+---
+
+# Android 开发环境的搭建
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+--- #9
+transition: fade-out
+level: 2
+---
+
+# 搭建步骤总览
+
+
+<v-clicks>
+
+1. 安装 JDK：安卓开发需要 Java，所以首先需要安装 JDK。如果使用 Kotlin 开发，尽管是一门独立的语言，同样需要 JDK。
+2. 安装 Android Studio：Android 官方推荐的 IDE，提供了丰富的开发工具和模拟器。
+3. 配置 Android SDK：根据所需适配的安卓版本，下载相关的 SDK，Android SDK 是 Android 开发的核心工具，包含了 Android 系统的所有 API。
+4. 创建 AVD：Android Virtual Device，模拟器，用于在电脑上模拟安卓设备。
+5. 创建项目：创建一个新的 Android 项目，选择语言（Java/Kotlin）和模板（Empty Activity/Basic Activity）。
+6. 第一个 Hello World：运行项目，查看效果。
+
+</v-clicks>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+--- #10
+transition: fade-out
+level: 2
+---
+
+# 安装 JDK
+
+<div class="relative h-full w-full">
+<div class="absolute w-full h-full top-0 left-0">
+
+<v-clicks>
+
+- 安卓开发需要安装 JDK（Java Development Kit）。
+- 下载地址：[Oracle JDK](https://www.oracle.com/java/technologies/downloads) 或 [OpenJDK](https://jdk.java.net/)
+- 安装完成后，配置环境变量。以 Windows 为例，添加系统环境变量 `JAVA_HOME`，值为 JDK 的安装目录，例如张三的 JDK 安装在 `C:\Program Files\Java\jdk-21`，则 `JAVA_HOME` 的值为 `C:\Program Files\Java\jdk-21`；再在系统环境变量 Path 中添加 `%JAVA_HOME%\bin`，这里的`%JAVA_HOME%`就是刚刚设置的系统环境变量 `JAVA_HOME` 的值。
+
+</v-clicks>
+
+</div>
+<div class="absolute w-full h-full top-0 left-0 bg-white" v-click>
+<img src="/img/java-home.png" class="w-[78%] h-auto">
+</div>
+
+<div class="absolute w-full h-full top-0 left-0 bg-white" v-click>
+<img src="/img/path.png" class="w-[78%] h-auto">
+</div>
+
+</div>
+
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- 设置换将变量时，用户变量和系统变量都可以，如果是系统变量，那就是给这台电脑所有用户设置的。 -->
+
+--- #11
+transition: fade-out
+level: 2
+---
+
+# 安装 Android Studio
+
+在很早之前，Android 项目都是使用 Eclipse 来开发的，它是 Java 开发神器，安装 ADT（Android Development Tools）插件后就可以用来开发 Android 程序了。而在 2013 年，Google 推出了一款官方的 IDE 工具 Android Studio，由于不再是以插件的形式存在，Android Studio 在开发 Android 程序方面要远比 Eclipse 强大和方便得多。
+
+- 下载地址：[Android Studio](https://developer.android.com/studio)
+
+<img src="/img/android-studio.png" class="w-full h-auto -ml-[20%]">
+
+
+
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+--- #12
+transition: fade-out
+level: 2
+---
+
+# 配置 Android SDK
+
+<div class="relative h-full w-full">
+
+<div class="absolute top-0 left-0 h-full w-full">
+
+Android SDK 是 Android 开发的核心工具，包含了 Android 系统的所有 API。Android Studio 会自动下载 SDK，但是如果需要适配特定的安卓版本，可以手动下载。Android SDK 包含以下主要组件：
+
+<v-clicks>
+
+- SDK Platform：包含特定版本 Android 系统的 API，用于编译和运行应用程序。
+- Sources for Android SDK：包含 Android 系统源代码，用于调试。
+- System Images：包含模拟器的系统镜像，用于在模拟器上运行应用程序。
+- SDK Tools：包含 Android 开发工具，如 adb（Android Debug Bridge）、emulator（模拟器）、Platform Tools、NDK（Native Development Kit）等。
+
+</v-clicks>
+
+</div>
+
+<div class="absolute top-0 left-0 h-full w-full bg-white z-10" v-click>
+  <img src="/img/sdk-platforms.png" class="w-[85%] h-auto">
+</div>
+
+<div class="absolute top-0 left-0 h-full w-full bg-white z-20" v-click>
+  <img src="/img/sdk-tools.png" class="w-[85%] h-auto">
+</div>
+
+<div class="absolute -top-1 left-0 h-full w-full bg-white z-30" v-click>
+  <img src="/img/sdk-size.png" class="w-[60%] h-auto">
+</div>
+
+</div>
+
+<!-- 
+SDK 在安装 Android Studio 时，应该已经安装了（网络好的情况），如果网络状况不佳，可以先跳过 SDK 下载，安装完 Android Studio 后再下载 SDK 并导入。
+Platform Tools：包含 adb（Android Debug Bridge）、fastboot 等工具。fastboot 是一个用于刷机的工具，可以用来刷机、解锁 bootloader、刷 recovery 等。
+NDK(Native Development Kit)：用于在 Android 应用中使用本地代码（C/C++）。
+ -->
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+--- #13
+layout: two-cols-header
+transition: fade-out
+level: 2
+---
+
+# 创建 AVD
+
+::left::
+
+Android Virtual Device（AVD）是 Android Studio 提供的模拟器，用于在电脑上模拟安卓设备。在 Android Studio 中，可以通过 AVD Manager 创建和管理模拟器。
+
+<v-clicks>
+
+- 打开 Android Studio，点击 `Tools` -> `Devices Manager`。
+- 点击加号小图标 `Add a new device`，选择一个设备类型，例如 Pixel 4。
+- 选择一个系统镜像，例如 Android 8.0（API 26）。
+- 配置 AVD 的参数，例如分辨率、启动时方向、软硬件加速等。
+- 点击 `Finish` 完成创建。
+
+</v-clicks>
+
+::right::
+
+<div class="flex flex-col items-center" v-click>
+<img src="/img/pixel.png" class="w-[60%] h-auto">
+</div>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- 
+模拟器只能模拟软件和部分硬件，模拟器上运行的应用程序可能会和真机上有所不同。模拟器的性能也不如真机。在碰到特定机型的问题或特殊的硬件如 NFC、传感器等时，只能使用真机调试。
+ -->
+
+--- #14
+transition: fade-out
+level: 2
+---
+
+# 创建项目
+
+<div class="relative h-full w-full">
+
+<div class="absolute top-0 left-0" v-click.hide>
+
+在 Android Studio 中，可以通过 `File` -> `New` -> `New Project` 创建一个新的 Android 项目。在创建项目时，需要选择项目的语言（Java/Kotlin）和模板（Empty Activity/Basic Activity）。
+
+<v-clicks>
+
+- 模板：Android Studio 提供了一些模板，例如 Empty Activity、Basic Activity、Navigation Drawer Activity、Bottom Navigation Activity 等，可以根据项目需求选择。
+- 项目名称：项目名称是 Android 项目的显示名称，例如 `MyApp`。
+- 包名：包名是 Android 项目的唯一标识，一般是公司域名的反写，例如 `com.example.myapp`。
+- 项目路径：项目路径是 Android 项目的存放路径，可以选择默认路径或自定义路径。
+- 语言：Android Studio 支持 Java 和 Kotlin 两种语言，Kotlin 是一种由 JetBrains 开发的现代化编程语言，谷歌宣布 Kotlin 成为 Android 官方开发语言。
+- 其他配置：还可以配置项目的最低 SDK 版本、编译配置语言等。
+
+</v-clicks>
+
+</div>
+
+<div class="absolute top-0 left-0" v-click>
+<img src="/img/create-project.png" class="w-[70%] h-auto" />
+</div>
+
+</div>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+--- #15
+transition: fade-out
+level: 2
+---
+
+# 第一个 Hello World
+
+<SlidevVideo v-click autoplay controls class="w-[85%] h-auto">
+  <!-- Anything that can go in a HTML video element. -->
+  <source src="/video/hello-world.mp4" type="video/mp4" />
+  <p>
+    Your browser does not support videos. You may download it
+    <a href="/video/hello-world.mp4">here</a>.
+  </p>
+</SlidevVideo>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+
+--- #15
+transition: fade-out
+layout: section
+---
+
+# Android 项目结构
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+--- #16
+transition: fade-out
+level: 2
+---
+
+# 项目结构总览
+
+````md magic-move
+```java
+// 根目录结构
+.
+├── app               // 项目的主模块文件夹
+├── build.gradle      // 项目级别的 build.gradle，用于配置整个项目的构建设置和依赖项
+├── .gitignore        // Git 忽略文件
+├── .gradle           // Gradle 缓存目录，用于存储与构建相关的缓存文件和临时文件
+├── gradle            // Gradle 目录
+├── gradle.properties // 用于配置 Gradle 构建系统的全局属性，可以调整构建构成的行为和性能
+├── gradlew           // 脚本文件，用于 Unix 系统（如 Linux 和 macOS）上执行 Gradle 的构建命令
+├── gradlew.bat       // 脚本文件，用于 Windows 系统上执行 Gradle 的构建命令
+├── local.properties  // 本地配置文件，主要是 SDK 路径
+└── settings.gradle   // 定义项目包含的所有模块
+```
+```java
+// 展开 app 文件夹
+./app
+├── build.gradle                              // 模块级别的 build.gradle，用于配置模块的构建设置和依赖项
+├── .gitignore                                // Git 忽略文件
+├── proguard-rules.pro                        // ProGuard 规则文件，用于代码混淆和优化
+└── src                                       // 源代码目录
+    ├── androidTest                           // Android 测试代码
+    ├── main                                  // 主代码目录
+    │   ├── AndroidManifest.xml               // Android 应用的清单文件
+    │   ├── java                              // Java 源代码 
+    │   │   └── com                           // 包名
+    │   │       └── example                   // 项目名
+    │   │           └── projectstructure      // 模块名
+    │   │               └── MainActivity.java // 应用的主要活动类文件
+    │   └── res                               // 资源目录
+    └── test                                  // 单元测试代码
+...
 ```
 
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
+```java
+res // 展开 app/src/main/res 文件夹
+├── drawable
+│   ├── ic_launcher_background.xml
+│   └── ic_launcher_foreground.xml
+├── layout
+│   └── activity_main.xml
+├── mipmap-anydpi
+│   ├── ic_launcher_round.xml
+│   └── ic_launcher.xml
+├── mipmap-hdpi
+│   ├── ic_launcher_round.webp
+│   └── ic_launcher.webp
+├── mipmap-mdpi
+├── mipmap-xhdpi
+├── mipmap-xxhdpi
+├── mipmap-xxxhdpi
+├── values
+│   ├── colors.xml
+│   ├── strings.xml
+│   └── themes.xml
+├── values-night
+│   └── themes.xml
+└── xml
+    ├── backup_rules.xml
+    └── data_extraction_rules.xml
 ```
 ````
 
----
 
-# Components
 
-<div grid="~ cols-2 gap-4">
-<div>
 
-You can use Vue components directly inside your slides.
 
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
 
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-class: px-20
----
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
-
-<br>
-
-<v-click>
-
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn More](https://sli.dev/guide/animations#click-animations)
-
-</div>
-
----
-
-# Motions
-
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
-
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
-
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/guide/syntax#latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
-
----
-foo: bar
-dragPos:
-  square: 468,290,167,_,-16
----
-
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
-
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
-
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <carbon:arrow-up />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="579,156,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-src: ./pages/multiple-entries.md
-hide: false
----
-
----
-
-# Monaco Editor
-
-Slidev provides built-in Monaco Editor support.
-
-Add `{monaco}` to the code block to turn it into an editor:
-
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
-
-const arr = ref(emptyArray(10))
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
-
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
-```
-
----
-layout: center
-class: text-center
----
-
-# Learn More
-
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
-
-<PoweredBySlidev mt-10 />
