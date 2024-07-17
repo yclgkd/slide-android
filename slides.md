@@ -198,6 +198,10 @@ h1 {
 }
 </style>
 
+<!-- 
+Android 和 iOS 从大版本更新频率上来讲大致相同都是一年一次。但是大版本的更新分发速度不同，这是因为 Android 的更新需要经过厂商的适配，而 iOS 的更新是由苹果直接发布的，所以 iOS 的更新速度要快于 Android。
+ -->
+
 
 --- #7
 transition: fade-out
@@ -520,7 +524,7 @@ h1 {
 </style>
 
 
---- #15
+--- #16
 transition: fade-out
 layout: section
 ---
@@ -539,12 +543,12 @@ h1 {
 }
 </style>
 
---- #16
+--- #17
 transition: fade-out
 level: 2
 ---
 
-# 项目结构总览
+# 目录结构总览
 
 ````md magic-move
 ```java
@@ -588,30 +592,791 @@ res // 展开 app/src/main/res 文件夹
 │   └── ic_launcher_foreground.xml            // 应用图标前景
 ├── layout                                    // 存放布局文件
 │   └── activity_main.xml                     // 主活动的布局文件
-├── mipmap-anydpi                             // 
-│   ├── ic_launcher_round.xml
-│   └── ic_launcher.xml
-├── mipmap-hdpi
-│   ├── ic_launcher_round.webp
-│   └── ic_launcher.webp
-├── mipmap-mdpi
-├── mipmap-xhdpi
-├── mipmap-xxhdpi
-├── mipmap-xxxhdpi
-├── values
-│   ├── colors.xml
-│   ├── strings.xml
-│   └── themes.xml
-├── values-night
-│   └── themes.xml
-└── xml
-    ├── backup_rules.xml
-    └── data_extraction_rules.xml
+├── mipmap-anydpi                             // 存放应用图标（适配所有分辨率）
+│   ├── ic_launcher_round.xml                 // 圆形图标
+│   └── ic_launcher.xml                       // 正方形图标
+├── mipmap-hdpi                               // 存放应用图标（高分辨率），240dpi
+│   ├── ic_launcher_round.webp                // 圆形图标
+│   └── ic_launcher.webp                      // 正方形图标
+├── mipmap-mdpi                               // 存放应用图标（中分辨率），160dpi
+├── mipmap-xhdpi                              // 存放应用图标（超高分辨率），320dpi
+├── mipmap-xxhdpi                             // 存放应用图标（超超高分辨率），480dpi
+├── mipmap-xxxhdpi                            // 存放应用图标（超超超高分辨率），640dpi
+├── values                                    // 存放资源文件
+│   ├── colors.xml                            // 颜色资源
+│   ├── strings.xml                           // 字符串资源
+│   └── themes.xml                            // 主题资源
+├── values-night                              // 夜间模式资源
+│   └── themes.xml                            // 夜间模式主题资源
+└── xml                                       // 存放 XML 文件
+    ├── backup_rules.xml                      // 备份规则
+    └── data_extraction_rules.xml             // 数据提取规则
 ```
 ````
 
+<!-- 
+anydpi 是分辨率为任意的，这里存放的是适配所有分辨率的图标，例如圆形图标和正方形图标。
+hdpi 是分辨率为 240dpi 的，这里存放的是高分辨率的图标。
+mdpi 是分辨率为 160dpi 的，这里存放的中分辨率的图标。
+xhdpi 是分辨率为 320dpi 的，这里存放的是超高分辨率的图标。
+xxhdpi 是分辨率为 480dpi 的，这里存放的是超超高分辨率的图标。
+xxxhdpi 是分辨率为 640dpi 的，这里存放的是超超超高分辨率的图标。
+
+如果需要国际化，默认语言包存放在 values 文件夹下，values-zh 存放中文简体语言包，values-en 存放英文语言包。
+ -->
+
+--- #18
+transition: fade-out
+level: 2
+---
+
+# AndroidManifest.xml
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"                              <!-- 应用图标 -->
+        android:label="@string/app_name"                                <!-- 应用名称 -->
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ProjectStructure"
+        tools:targetApi="31">
+        <!-- 申明一个 Activity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+```
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- 
+AndroidManifest.xml 用于描述应用的基本信息，如应用名称、图标、权限、组件等。在 AndroidManifest.xml 中，可以声明应用的 Activity、Service、BroadcastReceiver、ContentProvider 等组件，以及权限、权限组、应用的配置信息等。
+
+也可以看成路由注册表，当应用启动时，系统会根据 AndroidManifest.xml 中的配置信息来启动相应的组件。
+ -->
+
+--- #19
+transition: fade-out
+level: 2
+---
+
+# 项目级别的 build.gradle
+
+Android Studio 是采用 Gradle 来构建项目的。Gradle 是一个非常先进的项目构建工具，它使用了一种基于 Groovy 的领域特定语言 DSL（ Domain Specific Language）来进行项目设置，摒弃了传统基于 XML（如 Ant 和 Maven）的各种烦琐配置。
+
+<v-click>
+
+```groovy
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+// 默认的 Android 插件被放置在这里，不会立即应用（apply false）。这样做的目的是在模块级别的 build.gradle 文件中更灵活的应用这些插件。
+alias(libs.plugins.android.application) apply false 
+}
+```
+
+</v-click>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- 
+在新版本的 Android Studio 中，项目级别的 build.gradle 文件中只包含了一个 `plugins` 块，用于禁用默认的 Android 插件。项目级别的 build.gradle 文件用于配置整个项目的构建设置和依赖项。 
+
+这意味着在子模块中，可以自由选择是否应用 Android 插件，这样可以更灵活的控制项目的构建行为。
+
+同时因为根 build.gradle 文件中固定了插件的版本号，简化了插件版本的管理，确保所有的模块使用相同的插件版本，避免版本冲突。
+
+根目录中的 build.gradle 由 Android Studio 自动生成，一般情况下不需要修改，除非需要增加一些全局的配置。
+-->
+
+--- #20
+transition: fade-out
+level: 2
+---
+
+# 模块级别的 build.gradle
 
 
+````md magic-move
+```groovy
+plugins {         // 定义模块中使用的插件
+  // ...
+}
+android {         // 定义 Android 构建设置
+  // ...
+}
+dependencies {    // 定义模块的依赖项
+  // ...
+}
+```
+```groovy
+plugins {
+    alias(libs.plugins.android.application) // 应用 Android 插件
+    // alias(libs.plugins.jetbrains.kotlin.android) // 应用 Kotlin 插件
+}
+android {
+ // ...
+}
+dependencies {
+  // ...
+}
+```
+```groovy
+plugins {// ...
+}
+android {
+    namespace 'com.example.projectstructure'            // 包名
+    compileSdk 34                                       // 编译 SDK 版本
+    defaultConfig {                                           
+        applicationId "com.example.projectstructure"    // 应用 ID
+        minSdk 26
+        targetSdk 34
+        versionCode 1                                   // 版本号
+        versionName "1.0"                               // 版本名称
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner" // 测试运行器
+    }
+    buildTypes {
+        release {
+            minifyEnabled false                          // 是否启用代码混淆
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8      // 源代码兼容性
+        targetCompatibility JavaVersion.VERSION_1_8      // 目标兼容性
+    }
+}
+dependencies {// ...
+}
+```
+```groovy
+plugins {
+    // ...
+}
+android {
+    //...
+}
+dependencies {
+    implementation libs.appcompat                 // AppCompat 库
+    implementation libs.material                  // Material Design 库
+    implementation libs.activity                  // Activity 库
+    implementation libs.constraintlayout          // 约束布局库
+    testImplementation libs.junit                 // JUnit 测试库
+    androidTestImplementation libs.ext.junit      // Android JUnit 测试库
+    androidTestImplementation libs.espresso.core  // Espresso 测试库
+}
+```
+````
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- 
+首先第一行应用了一个插件，一般有两种值可选：com.android.application 表示这是一个应用程序模块，com.android.library 表示这是一个库模块。二者最大的区别在于，应用程序模块是可以直接运行的，库模块只能作为代码库依附于别的应用程序模块来运行。
+
+如果想要使用 Kotlin 来开发 Android 项目，就需要使用 libs.plugins.jetbrains.kotlin.android 这个插件
+
+ -->
+
+--- #21
+transition: fade-out
+level: 2
+---
+
+# values 文件夹
+
+<v-click>
+
+```xml
+// colors.xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color> <!-- 布局文件中通过 @color/black 引用 -->
+    <color name="white">#FFFFFFFF</color> <!-- Java/Kotlin 代码中通过 R.color.white 引用 -->
+</resources>
+```
+
+</v-click>
+
+<v-click>
+
+```xml
+// strings.xml
+<resources>
+    <string name="app_name">Project Structure</string> <!-- 布局文件中通过 @string/app_name 引用 -->
+</resources>
+```
+
+</v-click>
+
+<v-click>
+
+```xml
+// themes.xml
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- 基础主题，继承自 Material3 主题 -->
+    <style name="Base.Theme.ProjectStructure" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+    <!-- 应用主题，在 AndroidManifest.xml 中，可以通过 android:theme="@style/Theme.ProjectStructure" 来应用自定义主题 -->
+    <style name="Theme.ProjectStructure" parent="Base.Theme.ProjectStructure" />               <!-- 应用主题 -->
+</resources>
+```
+
+</v-click>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- 
+themes.xml 中并非有两个主题，Base.Theme.ProjectStructure 是基 theme，Theme.ProjectStructure 是自定义 theme，继承了 Base.Theme.ProjectStructure。
+
+这种结构可以使得在 Base 中定义通用样式，然后在需要时通过继承来进行具体的应用样式自定义。这样的方法提供了灵活性和可维护性，因为你可以在一个地方定义通用样式，而不必在每一个具体的主题中重复定义
+ -->
+
+--- #22
+transition: fade-out
+layout: section
+---
+
+# 看得见的 Activity
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+--- #23
+layout: two-cols-header
+transition: fade-out
+level: 2
+---
+
+# 什么是 Activity？
+
+::left::
+
+Activity 是 Android 应用的一个组件，它提供了一个用户界面，用户可以与之交互。Activity 通常是一个单独的屏幕，它可以包含一些 UI 控件，如按钮、文本框、列表等。
+
+<v-clicks>
+
+- 一个应用可以包含多个 Activity，每个 Activity 都是一个单独的屏幕。
+- 每个 Activity 都可以调用其他 Activity，实现页面之间的跳转。
+- Activity 也可以调用其他应用的 Activity，实现应用之间的跳转。
+- Activity 有生命周期，包括创建、启动、暂停、恢复、停止、销毁等状态。
+
+</v-clicks>
+
+::right::
+
+<v-click>
+
+<div class="flex flex-row items-center">
+<img src="/img/activity.png" class="w-full h-auto" />
+</div>
+
+</v-click>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- 
+例如，淘宝的主 activity 是首页，用户可以通过点击商品进入商品详情页，这个商品详情页就是另一个 activity。
+-->
+
+--- #24
+transition: fade-out
+level: 2
+---
+
+# 手动创建 Activity
 
 
+<SlidevVideo v-click autoplay controls class="w-[80%] h-auto">
+  <!-- Anything that can go in a HTML video element. -->
+  <source src="/video/create-activity.mp4" type="video/mp4" />
+  <p>
+    Your browser does not support videos. You may download it
+    <a href="/video/create-activity.mp4">here</a>.
+  </p>
+</SlidevVideo>
 
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+--- #25
+transition: fade-out
+level: 2
+---
+
+# 详解 FirstActivity
+
+```java
+package com.example.projectstructure;
+
+import android.os.Bundle;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+// AppCompatActivity 是 AndroidX 库中的一个 Activity 类，提供了向后兼容的功能
+// 继承链：FirstActivity -> AppCompatActivity -> FragmentActivity -> ComponentActivity -> Activity -> ContextThemeWrapper -> ContextWrapper -> Context
+public class FirstActivity extends AppCompatActivity {
+    // onCreate 方法是 Activity 的生命周期方法，当 Activity 创建时会调用这个方法
+    @Override
+    protected void onCreate(Bundle savedInstanceState) { // Bundle 是一个键值对的数据结构，用于保存 Activity 的状态
+        super.onCreate(savedInstanceState);       // 调用父类的 onCreate 方法
+        EdgeToEdge.enable(this);                  // 启用边缘到边缘布局
+        setContentView(R.layout.activity_first);  // 设置 Activity 的布局文件为 activity_first.xml，R 是资源文件的引用
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+}
+```
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+
+<!-- 
+希望在较老的 Android 设备中使用一些较新的平台特性的 Activity 的基类。
+
+之前 Java 中构造函数使用 super 完成初始化。在继承中，Override 一个方法时，如果想要调用父类的方法，可以使用 super 关键字，来继续添加一些新的逻辑。 如果在 Override 中不调用 super.onCreate()，则是对该方法的完全重写，会导致父类的方法不会被调用。在这里会影响到父类的初始化逻辑，导致一些意外的行为。
+
+ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {...}): 为布局中的 main 视图设置一个窗口插入事件监听器。当系统窗口（如状态栏和导航栏）发生变化时，会调用这个监听器。这里使用 lambda 表达式来实现监听器，lambda 表达式是一种简洁的语法，用于创建匿名函数。
+Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());: 从 WindowInsetsCompat 对象中获取系统栏的插入（insets），这些插入值代表系统栏的大小。
+v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);: 为 main 视图设置相应的填充（padding），以确保视图内容不会被系统栏遮挡。
+return insets;: 返回 insets 对象，以便继续处理其他插入事件。
+
+这个是为了保证视图内容不被遮挡，提供良好的用户体验。
+-->
+
+--- #26
+transition: fade-out
+level: 2
+---
+
+# Activity 中监听点击事件
+
+<div class="relative h-full w-full">
+<div class="flex flex-row">
+
+<div class="w-1/2">
+```java
+// MainActivity.java
+package com.example.projectstructure;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Button button1 = findViewById(R.id.button1);
+        button1.setOnClickListener((view) -> {
+            Toast.makeText(this, "You clicked Button 1", Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(this::finish, 3000);
+        });
+    }
+}
+```
+
+</div>
+
+
+<div class="w-1/2">
+```java
+// main_activity.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button 1" />
+</LinearLayout>
+```
+
+</div>
+</div>
+<v-click>
+<div class="absolute top-0 left-0 bg-white h-full w-full">
+<SlidevVideo v-click autoplay controls class="w-[80%] h-auto">
+  <!-- Anything that can go in a HTML video element. -->
+  <source src="/video/on-click.mp4" type="video/mp4" />
+  <p>
+    Your browser does not support videos. You may download it
+    <a href="/video/on-click.mp4">here</a>.
+  </p>
+</SlidevVideo>
+</div>
+</v-click>
+</div>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- 
+.show() 不是链式调用，而是一个静态方法，用于创建一个 Toast 对象并显示出来。
+
+this::finish 是 Java8 中引入的方法引用语法的一部分，用于引用当前实例（this）的 finish 方法。方法引用提供了一种简洁的写法，而不需要显示的声明一个 lambda 表达式。
+ -->
+
+--- #27
+transition: fade-out
+level: 2
+---
+
+# Activity 之间的跳转
+
+<div class="relative h-full w-full">
+<div class="absolute top-0 left-0">
+
+Intent 是 Android 程序中各组件之间进行交互的一种重要方式，它不仅可以指明当前组件想要执行的动作，还可以在不同组件之间传递数据。Intent 一般可用于启动 Activity、启动 Service 以及发送广播等场景。
+
+````md magic-move
+```java
+// MainActivity.java
+package com.example.projectstructure;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Button button1 = findViewById(R.id.button1);
+        button1.setOnClickListener((view) -> {
+            Intent intent = new Intent(this, FirstActivity.class);
+            startActivity(intent);
+        });
+    }
+}
+```
+```java
+// MainActivity.java
+package com.example.projectstructure;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Button button1 = findViewById(R.id.button1);
+        button1.setOnClickListener((view) -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://baidu.com/"));
+            startActivity(intent);
+        });
+    }
+}
+```
+````
+
+</div>
+
+<div class="absolute h-full w-full bg-white top-0 left-0" v-click>
+<SlidevVideo v-click autoplay controls class="w-[80%] h-auto">
+  <!-- Anything that can go in a HTML video element. -->
+  <source src="/video/baidu.mp4" type="video/mp4" />
+  <p>
+    Your browser does not support videos. You may download it
+    <a href="/video/baidu.mp4">here</a>.
+  </p>
+</SlidevVideo>
+</div>
+</div>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- 
+显示 Intent 是一个显示的 Intent，用于启动一个指定的 Activity。在这里，我们通过 Intent 的构造方法指定了要启动的 Activity 的类名，然后调用 startActivity 方法来启动这个 Activity。因为意图非常明显，所以这种 Intent 称为显示 Intent。
+
+使用隐式Intent，不仅可以启动自己程序内的Activity，还可以启动其他程序的Activity，这就使多个应用程序之间的功能共享成为了可能。比如你的应用程序中需要展示一个网页，这时你没有必要自己去实现一个浏览器（事实上也不太可能），只需要调用系统的浏览器来打开这个网页就行了。
+
+除了展示网页，隐式Intent 还可以用于打开系统的其他应用程序，比如打开系统的短信应用、电话应用、地图应用等。
+ -->
+
+--- #28
+transition: fade-out
+level: 2
+---
+
+# Activity 之间的数据传递
+
+````md magic-move
+```java
+// 向下传递数据
+// MainActivity.java
+package com.example.projectstructure;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Button button1 = findViewById(R.id.button1);
+        button1.setOnClickListener((view) -> {
+            Intent intent = new Intent(this, FirstActivity.class);
+            intent.putExtra("key", "value");
+            startActivity(intent);
+        });
+    }
+}
+```
+```java
+// FirstActivity.java
+package com.example.projectstructure;
+import android.os.Bundle;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class FirstActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_first);
+        TextView textView = findViewById(R.id.textView);
+        String value = getIntent().getStringExtra("key");
+        textView.setText(value);
+    }
+}
+```
+```java
+// 向上传递数据
+// MainActivity.java
+package com.example.projectstructure;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Button button1 = findViewById(R.id.button1);
+        button1.setOnClickListener((view) -> {
+            Intent intent = new Intent(this, FirstActivity.class);
+            startActivityForResult(intent, 1);
+        });
+    }
+}
+```
+```java
+// FirstActivity.java
+package com.example.projectstructure;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class FirstActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_first);
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener((view) -> {
+            Intent intent = new Intent();
+            intent.putExtra("key", "value");
+            setResult(1, intent);
+            finish();
+        });
+    }
+}
+```
+````
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+--- #29
+layout: two-cols-header
+transition: fade-out
+level: 2
+---
+
+# Activity 的生命周期
+
+::left::
+<img src="/img/lifecycle.png" class="w-[78%] h-auto" />
+
+::right::
+
+<v-clicks>
+
+- onCreate：Activity 创建时调用
+- onStart：Activity 可见时调用
+- onResume：Activity 可交互时调用
+- onPause：Activity 失去焦点时调用
+- onStop：Activity 不可见时调用
+- onDestroy：Activity 销毁时调用
+
+</v-clicks>
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+<!-- 
+当用户浏览、退出和返回到您的应用时，您应用中的 Activity 实例会在其生命周期的不同状态间转换。Activity 类提供了许多回调，这些回调会让 activity 知道状态何时发生变化，或者系统正在创建、停止、恢复 activity 或销毁 activity 所在的进程。
+
+在生命周期回调方法中，您可以声明用户离开和再次进入 Activity 时 Activity 的行为方式。例如，如果您构建的是流式视频播放器，当用户切换到其他应用时，您可以暂停视频并终止网络连接。当用户返回时，您可以重新连接到网络，让用户从同一位置继续播放视频。
+ -->
+
+--- #30
+layout: end
+transition: fade-out
+---
+
+# 谢谢观看😃
+
+该幻灯片可以在👉[android-tutorial.vercel.app](https://android-tutorial.vercel.app)上查看
