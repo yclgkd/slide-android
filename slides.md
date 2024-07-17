@@ -25,6 +25,7 @@ transition: slide-left
 mdc: true
 presenter: dev
 record: dev
+contextMenu: dev
 ---
 
 # ***Android 入门***
@@ -582,12 +583,12 @@ level: 2
 
 ```java
 res // 展开 app/src/main/res 文件夹
-├── drawable
-│   ├── ic_launcher_background.xml
-│   └── ic_launcher_foreground.xml
-├── layout
-│   └── activity_main.xml
-├── mipmap-anydpi
+├── drawable                                  // 存放图片资源
+│   ├── ic_launcher_background.xml            // 应用图标背景
+│   └── ic_launcher_foreground.xml            // 应用图标前景
+├── layout                                    // 存放布局文件
+│   └── activity_main.xml                     // 主活动的布局文件
+├── mipmap-anydpi                             // 
 │   ├── ic_launcher_round.xml
 │   └── ic_launcher.xml
 ├── mipmap-hdpi
