@@ -1461,8 +1461,52 @@ h1 {
 使用Bundle保存和取出数据是不是有些似曾相识呢？没错！我们在使用Intent传递数据时也用的类似的方法。这里提醒一点，Intent还可以结合Bundle一起用于传递数据。首先我们可以把需要传递的数据都保存在Bundle对象中，然后再将Bundle对象存放在Intent里。到了目标Activity之后，先从Intent中取出Bundle，再从Bundle中一一取出数据
  -->
 
-
 --- #31
+transition: fade-out
+level: 2
+---
+
+# Activity 的启动模式
+
+Activity 的启动模式是指 Activity 在启动时的行为方式，Android 提供了四种启动模式：`standard`、`singleTop`、`singleTask` 和 `singleInstance`。如果不指定启动模式，默认为 `standard` 模式。实际开发中用的最多的是 `standard` 和 `singleTop` 模式。
+
+````md magic-move
+```java
+// AndroidManifest.xml
+// standard 模式
+<activity android:name=".FirstActivity"
+    android:launchMode="standard" />
+```
+```java
+// singleTop 模式
+<activity android:name=".FirstActivity"
+    android:launchMode="singleTop" />
+```
+```java
+// singleTask 模式
+<activity android:name=".FirstActivity"
+    android:launchMode="singleTask" />
+```
+```java
+// singleInstance 模式
+<activity android:name=".FirstActivity"
+    android:launchMode="singleInstance" />
+```
+````
+
+<style>
+h1 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+</style>
+
+--- #32
 layout: end
 transition: fade-out
 ---
