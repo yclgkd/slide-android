@@ -1435,8 +1435,8 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onSaveInstanceState(Bundle outState) { // 在 Activity 被回收之前调用
-        super.onSaveInstanceState(outState);
         outState.putString(KEY, value);                   // 保存数据
+        super.onSaveInstanceState(outState);
     }
 }
 ```
