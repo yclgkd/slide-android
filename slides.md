@@ -1372,6 +1372,24 @@ h1 {
 当用户浏览、退出和返回到您的应用时，您应用中的 Activity 实例会在其生命周期的不同状态间转换。Activity 类提供了许多回调，这些回调会让 activity 知道状态何时发生变化，或者系统正在创建、停止、恢复 activity 或销毁 activity 所在的进程。
 
 在生命周期回调方法中，您可以声明用户离开和再次进入 Activity 时 Activity 的行为方式。例如，如果您构建的是流式视频播放器，当用户切换到其他应用时，您可以暂停视频并终止网络连接。当用户返回时，您可以重新连接到网络，让用户从同一位置继续播放视频。
+
+onCreate()。这个方法你已经看到过很多次了，我们在每个Activity中都重写了这个方法，它会在Activity第一次被创建的时候调用。你应该在这个方法中完成Activity的初始化操作，比如加载布局、绑定事件等。
+onStart()。这个方法在Activity由不可见变为可见的时候调用。
+onResume()。这个方法在Activity准备好和用户进行交互的时候调用。此时的Activity一定位于返回栈的栈顶，并且处于运行状态。
+onPause()。这个方法在系统准备去启动或者恢复另一个Activity的时候调用。我们通常会在这个方法中将一些消耗CPU的资源释放掉，以及保存一些关键数据，但这个方法的执行速度一定要快，不然会影响到新的栈顶Activity的使用。
+onStop()。这个方法在Activity完全不可见的时候调用。它和onPause()方法的主要区别在于，如果启动的新Activity是一个对话框式的Activity，那么onPause()方法会得到执行，而onStop()方法并不会执行。
+onDestroy()。这个方法在Activity被销毁之前调用，之后Activity的状态将变为销毁状态。
+onRestart()。这个方法在Activity由停止状态变为运行状态之前调用，也就是Activity被重新启动了。
+
+以上7个方法中除了onRestart()方法，其他都是两两相对的，从而又可以将Activity分为以下3种生存期。
+完整生存期。Activity在onCreate()方法和onDestroy()方法之间所经历的就是完整生
+存期。一般情况下，一个Activity会在onCreate()方法中完成各种初始化操作，而在onDestroy()方法中完成释放内存的操作。
+可见生存期。Activity在onStart()方法和onStop()方法之间所经历的就是可见生存
+期。在可见生存期内，Activity对于用户总是可见的，即便有可能无法和用户进行交互。我们可以通过这两个方法合理地管理那些对用户可见的资源。比如在onStart()方法中对资源进行加载，而在onStop()方法中对资源进行释放，从而保证处于停止状态的Activity不会占用过多内存。
+前台生存期。Activity在onResume()方法和onPause()方法之间所经历的就是前台生存期。在前台生存期内，Activity总是处于运行状态，此时的Activity是可以和用户进行交互的，我们平时看到和接触最多的就是这个状态下的Activity。
+
+什么是 Activity 不再可见，但仍然存在于内存中？这种情况发生在 Activity 被另一个 Activity 部分遮挡时，或者用户按下 Home 键时。在这种情况下，Activity 会进入暂停状态，但仍然保留在内存中，以便用户可以返回到 Activity 而无需重新创建。此时 CPU 可能会被释放给其他应用，以便系统可以更快地响应用户的操作。
+
  -->
 
 --- #30
