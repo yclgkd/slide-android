@@ -1034,6 +1034,8 @@ h1 {
 
 之前 Java 中构造函数使用 super 完成初始化。在继承中，Override 一个方法时，如果想要调用父类的方法，可以使用 super 关键字，来继续添加一些新的逻辑。 如果在 Override 中不调用 super.onCreate()，则是对该方法的完全重写，会导致父类的方法不会被调用。在这里会影响到父类的初始化逻辑，导致一些意外的行为。
 
+举一反三，我们也可以通过继承链实现一点自己东西，比如写一个自己的 BaseActivity 在 onCreate 方法中添加一些自己的逻辑。打印日志，在开发中显示自己在哪个 Activity，编写单例类，统一管理 Activity；添加、销毁，或者销毁所有。
+
 ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {...}): 为布局中的 main 视图设置一个窗口插入事件监听器。当系统窗口（如状态栏和导航栏）发生变化时，会调用这个监听器。这里使用 lambda 表达式来实现监听器，lambda 表达式是一种简洁的语法，用于创建匿名函数。
 Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());: 从 WindowInsetsCompat 对象中获取系统栏的插入（insets），这些插入值代表系统栏的大小。
 v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);: 为 main 视图设置相应的填充（padding），以确保视图内容不会被系统栏遮挡。
