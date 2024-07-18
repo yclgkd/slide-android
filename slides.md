@@ -883,6 +883,8 @@ h1 {
 themes.xml 中并非有两个主题，Base.Theme.ProjectStructure 是基 theme，Theme.ProjectStructure 是自定义 theme，继承了 Base.Theme.ProjectStructure。
 
 这种结构可以使得在 Base 中定义通用样式，然后在需要时通过继承来进行具体的应用样式自定义。这样的方法提供了灵活性和可维护性，因为你可以在一个地方定义通用样式，而不必在每一个具体的主题中重复定义
+
+ActionBar 是 Android 应用的一个重要组件，它通常位于应用的顶部，用于显示应用的标题、图标、操作按钮等。ActionBar 是一个 View，可以通过 XML 布局文件或 Java 代码来定义和操作。
  -->
 
 --- #22
@@ -1247,7 +1249,7 @@ public class MainActivity extends AppCompatActivity {
         Button button1 = findViewById(R.id.button1);
         button1.setOnClickListener((view) -> {
             Intent intent = new Intent(this, FirstActivity.class);
-            intent.putExtra("key", "value");
+            intent.putExtra("key", "value");  // 向下传递数据
             startActivity(intent);
         });
     }
@@ -1266,7 +1268,7 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         TextView textView = findViewById(R.id.textView);
-        String value = getIntent().getStringExtra("key");
+        String value = getIntent().getStringExtra("key"); // 获取传递的数据
         textView.setText(value);
     }
 }
@@ -1288,7 +1290,7 @@ public class MainActivity extends AppCompatActivity {
         Button button1 = findViewById(R.id.button1);
         button1.setOnClickListener((view) -> {
             Intent intent = new Intent(this, FirstActivity.class);
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, 1);  // 启动 Activity 并等待结果
         });
     }
 }
@@ -1309,9 +1311,9 @@ public class FirstActivity extends AppCompatActivity {
         Button button = findViewById(R.id.button);
         button.setOnClickListener((view) -> {
             Intent intent = new Intent();
-            intent.putExtra("key", "value");
-            setResult(1, intent);
-            finish();
+            intent.putExtra("key", "value");  // 向上传递数据
+            setResult(1, intent);             // 设置结果码和数据
+            finish();                         // 结束当前 Activity
         });
     }
 }
