@@ -1480,8 +1480,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String KEY = "key
-    private String value = "default
+    private static final String KEY = "key"
+    private String value = "default"
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
